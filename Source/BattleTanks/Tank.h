@@ -9,6 +9,8 @@
 class UTankBarrel; // Forward Declaration
 class UTankTurret;
 class UTankAimingComponent;
+class UTankMovementComponent;
+class AProjectile;
 
 UCLASS()
 class BATTLETANKS_API ATank : public APawn
@@ -24,6 +26,9 @@ protected:
 	virtual void BeginPlay() override;
 
 	UTankAimingComponent* TankAimingComponent = nullptr;
+
+	/*UPROPERTY(BlueprintReadOnly)
+	UTankMovementComponent* TankMovementComponent = nullptr;*/
 
 public:	
 
@@ -42,6 +47,18 @@ public:
 	void AimAt(FVector HitLocation);
 
 	UPROPERTY(EditAnywhere, Category = Firing)
-		float ProjectileSpeed = 100000.f; // TODO find sensible default
+		float ProjectileSpeed = 4000.f;
+
+	UPROPERTY(EditAnywhere, Category = Firing)
+		double LastFireTime = 0;
+
+	UPROPERTY(EditAnywhere, Category = Firing)
+		double ReloadTime = 3;
+
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
+		TSubclassOf<AProjectile> ProjectileBlueprint;
+
 	
+	UTankBarrel* Barrel = nullptr;
+
 };

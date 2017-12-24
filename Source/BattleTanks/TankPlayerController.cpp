@@ -90,7 +90,7 @@ bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVec
 		HitLocation = HitResult.Location;
 		return true;
 	}
-	UE_LOG(LogTemp, Warning, TEXT("No Hit!"));
+	//UE_LOG(LogTemp, Warning, TEXT("No Hit!"));
 	HitLocation = LineEnd;
 	return false;
 }

@@ -50,6 +50,7 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float ProjectileSpeed) {
 	if (!Barrel || !Turret) { return; }
 	
 	FVector OUTLaunchVelocity;
+	//FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
 	FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
 
 	if (UGameplayStatics::SuggestProjectileVelocity(
@@ -98,6 +99,24 @@ void UTankAimingComponent::MoveTurretTowards(FVector AimDirection) {
 	// TODO Fix the way this rotates
 	//UE_LOG(LogTemp, Warning, TEXT("Rotate: %f"), TurretDeltaRotator.Yaw);
 
-	Turret->Rotate(TurretDeltaRotator.Yaw);
+
+	
+
+	if (FMath::Abs(TurretDeltaRotator.Yaw) < 180)
+
+	{
+
+		Turret->Rotate(TurretDeltaRotator.Yaw);
+
+	}
+	
+	else // Avoid going the long-way round
+
+	{
+
+		Turret->Rotate(-TurretDeltaRotator.Yaw);
+
+	}
+
 
 }

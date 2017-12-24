@@ -18,5 +18,5 @@ public:
 	void Rotate(float RotationRate);
 	
 	UPROPERTY(EditAnywhere)
-		float MaxRotationRate = 10.f;
+		float MaxRotationRate = 100.f;
 };
