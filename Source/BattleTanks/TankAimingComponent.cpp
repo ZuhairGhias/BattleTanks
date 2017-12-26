@@ -31,20 +31,16 @@ void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, F
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	// ...
+	
 }
 
-void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet) {
+void UTankAimingComponent::Initialize(UTankTurret* TurretToSet, UTankBarrel* BarrelToSet) {
 
 	Barrel = BarrelToSet;
-
-}
-
-void UTankAimingComponent::SetTurretReference(UTankTurret* TurretToSet) {
-
 	Turret = TurretToSet;
 
 }
+
 void UTankAimingComponent::AimAt(FVector HitLocation, float ProjectileSpeed) {
 
 	if (!Barrel || !Turret) { return; }

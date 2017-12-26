@@ -24,6 +24,12 @@ void ATank::BeginPlay()
 	
 }
 
+void ATank::Initialize(UTankBarrel* BarrelToSet) {
+
+	Barrel = BarrelToSet;
+
+}
+
 // Called to bind functionality to input
 void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
@@ -32,17 +38,6 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 }
 
-void ATank::SetBarrelReference(UTankBarrel* BarrelToSet) {
-	Barrel = BarrelToSet;
-	TankAimingComponent->SetBarrelReference(BarrelToSet);
-
-}
-
-void ATank::SetTurretReference(UTankTurret* TurretToSet) {
-
-	TankAimingComponent->SetTurretReference(TurretToSet);
-
-}
 
 void ATank::AimAt(FVector HitLocation) {
 
@@ -58,7 +53,7 @@ void ATank::AimAt(FVector HitLocation) {
 }
 
 void ATank::Fire() {
-	//UE_LOG(LogTemp, Warning, TEXT("Fire!"));
+	
 
 	bool isReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTime;
 
@@ -66,6 +61,7 @@ void ATank::Fire() {
 		AProjectile* Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, Barrel->GetSocketLocation(FName("Projectile")), Barrel->GetSocketRotation(FName("Projectile")), FActorSpawnParameters());
 		Projectile->Launch(ProjectileSpeed);
 		LastFireTime = FPlatformTime::Seconds();
+		UE_LOG(LogTemp, Warning, TEXT("Fire!"));
 	}
 
 	
